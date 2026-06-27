@@ -7,10 +7,10 @@
 // CONFIGURATION
 // -------------------------------------------------------------
 // REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwujoZASixMk-BULlo__JH3mmcSMq_5U7vawqshw1H2fG9kWVBMrjsTzCYBjuW4Zq4/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Initialize functions
     initNavigation();
     initAudioPlayer();
@@ -68,9 +68,9 @@ function initNavigation() {
 function initAudioPlayer() {
     const audio = document.getElementById('bg-audio');
     const audioBtn = document.getElementById('audio-toggle');
-    
+
     if (!audio || !audioBtn) return;
-    
+
     // Reduce volume to pleasant background level
     audio.volume = 0.25;
 
@@ -146,7 +146,7 @@ function initCountdown() {
 // -------------------------------------------------------------
 function initScrollAnimations() {
     const fadeElements = document.querySelectorAll('.scroll-fade-in');
-    
+
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -195,7 +195,7 @@ function initRSVPForm() {
     // Form Submission
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         // Form validation passes, start submission visual state
         submitBtn.classList.add('loading');
         statusMsgContainer.innerHTML = ''; // Clear previous messages
@@ -212,18 +212,18 @@ function initRSVPForm() {
         // If URL is placeholder, use MOCK MODE for easy testing
         if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL' || GOOGLE_SCRIPT_URL === '') {
             console.warn("Using RSVP Mock Mode: Set a valid GOOGLE_SCRIPT_URL to record to Google Sheets.");
-            
+
             setTimeout(() => {
                 // Mock success
                 submitBtn.classList.remove('loading');
                 displayStatus('success', 'Thank you! Your RSVP has been recorded (Mock Mode).');
-                
+
                 // Save locally
                 saveWishLocally(formData.name, formData.message);
                 form.reset();
                 guestCountGroup.classList.remove('hidden'); // Reset layout
             }, 1200);
-            
+
             return;
         }
 
@@ -237,24 +237,24 @@ function initRSVPForm() {
             },
             body: JSON.stringify(formData)
         })
-        .then(() => {
-            // Because mode is 'no-cors', we won't get content in the response.
-            // But we know it completed without throwing an error (which is standard success behavior).
-            submitBtn.classList.remove('loading');
-            displayStatus('success', 'Thank you! Your RSVP has been successfully recorded.');
-            
-            // Save wish locally so it updates the board in real-time
-            if (formData.message) {
-                saveWishLocally(formData.name, formData.message);
-            }
-            form.reset();
-            guestCountGroup.classList.remove('hidden'); // Reset layout
-        })
-        .catch(error => {
-            console.error('Error submitting RSVP:', error);
-            submitBtn.classList.remove('loading');
-            displayStatus('error', 'Something went wrong. Please check your connection and try again.');
-        });
+            .then(() => {
+                // Because mode is 'no-cors', we won't get content in the response.
+                // But we know it completed without throwing an error (which is standard success behavior).
+                submitBtn.classList.remove('loading');
+                displayStatus('success', 'Thank you! Your RSVP has been successfully recorded.');
+
+                // Save wish locally so it updates the board in real-time
+                if (formData.message) {
+                    saveWishLocally(formData.name, formData.message);
+                }
+                form.reset();
+                guestCountGroup.classList.remove('hidden'); // Reset layout
+            })
+            .catch(error => {
+                console.error('Error submitting RSVP:', error);
+                submitBtn.classList.remove('loading');
+                displayStatus('error', 'Something went wrong. Please check your connection and try again.');
+            });
     });
 
     function displayStatus(type, message) {
@@ -295,7 +295,7 @@ function loadWishes() {
 
     // Clear dynamic cards (but keep the default static cards)
     const existingCards = board.querySelectorAll('.wish-card');
-    
+
     // We only remove cards that are marked dynamic to keep the seed messages
     existingCards.forEach(card => {
         if (card.classList.contains('dynamic-wish')) {
@@ -323,7 +323,7 @@ function loadWishes() {
 }
 
 function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, 
+    return str.replace(/[&<>'"]/g,
         tag => ({
             '&': '&amp;',
             '<': '&lt;',
