@@ -290,21 +290,46 @@ function loadWishes() {
     const board = document.getElementById('wishes-board');
     if (!board) return;
 
-    // Retrieve local wishes
-    const localWishes = JSON.parse(localStorage.getItem('graduation_wishes')) || [];
+    // Check if the URL is configured
+    if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL' || GOOGLE_SCRIPT_URL === '') {
+        renderLocalWishes();
+        return;
+    }
 
-    // Clear dynamic cards (but keep the default static cards)
+    // Fetch from Google Sheets Web App GET API
+    fetch(GOOGLE_SCRIPT_URL)
+    .then(response => {
+        if (!response.ok) throw new Error('Network response not ok');
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === 'success' && data.wishes) {
+            renderWishes(data.wishes);
+        } else {
+            console.warn("API returned error, falling back to local storage:", data.message);
+            renderLocalWishes();
+        }
+    })
+    .catch(error => {
+        console.error('Error loading wishes from Google Sheets:', error);
+        renderLocalWishes();
+    });
+}
+
+function renderWishes(wishes) {
+    const board = document.getElementById('wishes-board');
+    if (!board) return;
+
+    // Clear dynamic cards (keep default static seed cards)
     const existingCards = board.querySelectorAll('.wish-card');
-
-    // We only remove cards that are marked dynamic to keep the seed messages
     existingCards.forEach(card => {
         if (card.classList.contains('dynamic-wish')) {
             card.remove();
         }
     });
 
-    // Render local wishes
-    localWishes.forEach(wish => {
+    // Render wishes (newest first, appended to the top)
+    wishes.forEach(wish => {
         const card = document.createElement('div');
         card.className = 'wish-card dynamic-wish';
         card.style.borderColor = 'var(--accent-gold)';
@@ -317,9 +342,14 @@ function loadWishes() {
                 </div>
             </div>
         `;
-        // Prepend to board
+        // Prepend to wishes board so newest appears first
         board.insertBefore(card, board.firstChild);
     });
+}
+
+function renderLocalWishes() {
+    const localWishes = JSON.parse(localStorage.getItem('graduation_wishes')) || [];
+    renderWishes(localWishes);
 }
 
 function escapeHTML(str) {

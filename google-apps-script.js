@@ -15,8 +15,74 @@
  */
 
 function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "Graduation RSVP API is online." }))
-    .setMimeType(ContentService.MimeType.JSON);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // Check if sheet is empty
+    if (sheet.getLastRow() === 0) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", wishes: [] }))
+        .setMimeType(ContentService.MimeType.JSON)
+        .setHeaders({
+          "Access-Control-Allow-Origin": "*"
+        });
+    }
+    
+    var data = sheet.getDataRange().getValues();
+    var wishes = [];
+    
+    // Check if there are rows beyond the header (row 0 is header)
+    if (data.length > 1) {
+      // Loop backwards from latest to oldest
+      for (var i = data.length - 1; i >= 1; i--) {
+        var row = data[i];
+        var name = row[1]; // Guest Name
+        var message = row[4]; // Wishes / Message
+        var dateVal = row[0]; // Timestamp
+        
+        // Only include wishes that have a message
+        if (message && message.toString().trim() !== "") {
+          wishes.push({
+            name: name ? name.toString() : "Anonymous",
+            message: message.toString(),
+            date: formatDate(dateVal)
+          });
+        }
+      }
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success",
+      wishes: wishes
+    }))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      "Access-Control-Allow-Origin": "*"
+    });
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "Failed to load wishes: " + error.toString()
+    }))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      "Access-Control-Allow-Origin": "*"
+    });
+  }
+}
+
+/**
+ * Format timestamp into readable date
+ */
+function formatDate(dateVal) {
+  try {
+    var date = new Date(dateVal);
+    if (isNaN(date.getTime())) {
+      return "Recently";
+    }
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch (err) {
+    return "Recently";
+  }
 }
 
 function doPost(e) {
