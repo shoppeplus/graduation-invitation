@@ -17,19 +17,16 @@
 function doGet(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
+
     // Check if sheet is empty
     if (sheet.getLastRow() === 0) {
       return ContentService.createTextOutput(JSON.stringify({ status: "success", wishes: [] }))
-        .setMimeType(ContentService.MimeType.JSON)
-        .setHeaders({
-          "Access-Control-Allow-Origin": "*"
-        });
+        .setMimeType(ContentService.MimeType.JSON);
     }
-    
+
     var data = sheet.getDataRange().getValues();
     var wishes = [];
-    
+
     // Check if there are rows beyond the header (row 0 is header)
     if (data.length > 1) {
       // Loop backwards from latest to oldest
@@ -38,7 +35,7 @@ function doGet(e) {
         var name = row[1]; // Guest Name
         var message = row[4]; // Wishes / Message
         var dateVal = row[0]; // Timestamp
-        
+
         // Only include wishes that have a message
         if (message && message.toString().trim() !== "") {
           wishes.push({
@@ -49,18 +46,18 @@ function doGet(e) {
         }
       }
     }
-    
+
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
       wishes: wishes
     }))
-    .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
       message: "Failed to load wishes: " + error.toString()
     }))
-    .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -82,12 +79,12 @@ function formatDate(dateVal) {
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
+
     // Check if sheet is empty and add header row if needed
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(["Timestamp", "Guest Name", "Attendance Status", "Number of Guests", "Wishes / Message", "Contact Info"]);
     }
-    
+
     // Parse incoming data
     var data = {};
     if (e.postData && e.postData.contents) {
@@ -100,7 +97,7 @@ function doPost(e) {
     } else {
       data = e.parameter;
     }
-    
+
     // Extract fields
     var timestamp = new Date();
     var name = data.name || "Anonymous";
@@ -108,7 +105,7 @@ function doPost(e) {
     var guests = data.guests || 0;
     var message = data.message || "";
     var contact = data.contact || "";
-    
+
     // Append the row
     sheet.appendRow([
       timestamp,
@@ -118,21 +115,21 @@ function doPost(e) {
       message,
       contact
     ]);
-    
+
     // Return success response
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
       message: "RSVP recorded successfully!",
       received: { name: name, status: status, guests: guests }
     }))
-    .setMimeType(ContentService.MimeType.JSON);
-    
+      .setMimeType(ContentService.MimeType.JSON);
+
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
       message: "Failed to record RSVP: " + error.toString()
     }))
-    .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
