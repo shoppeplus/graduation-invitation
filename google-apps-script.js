@@ -125,20 +125,14 @@ function doPost(e) {
       message: "RSVP recorded successfully!",
       received: { name: name, status: status, guests: guests }
     }))
-    .setMimeType(ContentService.MimeType.JSON)
-    .setHeaders({
-      "Access-Control-Allow-Origin": "*"
-    });
+    .setMimeType(ContentService.MimeType.JSON);
     
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
       message: "Failed to record RSVP: " + error.toString()
     }))
-    .setMimeType(ContentService.MimeType.JSON)
-    .setHeaders({
-      "Access-Control-Allow-Origin": "*"
-    });
+    .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -162,10 +156,5 @@ function parseQueryString(queryString) {
  */
 function doOptions(e) {
   return ContentService.createTextOutput("")
-    .setMimeType(ContentService.MimeType.TEXT)
-    .setHeaders({
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
-    });
+    .setMimeType(ContentService.MimeType.TEXT);
 }
