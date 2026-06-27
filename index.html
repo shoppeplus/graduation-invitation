@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduation Invitation | Alex Mercer | Class of 2026</title>
+    <meta name="description" content="You are cordially invited to celebrate the graduation of Alex Mercer, Class of 2026. RSVP online for the ceremony and celebration.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Audio Player Element (Muted initially for autoplay policy) -->
+    <audio id="bg-audio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <button id="audio-toggle" class="audio-control" aria-label="Toggle background music">
+        <i class="fa-solid fa-volume-xmark"></i>
+    </button>
+
+    <!-- Header / Navigation -->
+    <header class="header-nav">
+        <div class="logo">A &amp; M</div>
+        <nav class="desktop-nav">
+            <a href="#hero">Home</a>
+            <a href="#details">Ceremony</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#rsvp" class="nav-rsvp-btn">RSVP</a>
+        </nav>
+        <button class="mobile-nav-toggle" id="mobile-menu-btn" aria-label="Open navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-drawer">
+        <a href="#hero" class="mobile-link">Home</a>
+        <a href="#details" class="mobile-link">Ceremony</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#gallery" class="mobile-link">Gallery</a>
+        <a href="#rsvp" class="mobile-link mobile-rsvp-link">RSVP Now</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-subtitle animated-text">YOU ARE CORDIALLY INVITED TO CELEBRATE</p>
+                <h1 class="hero-title animated-title">The Graduation of</h1>
+                <h2 class="hero-name animated-name">Alex Mercer</h2>
+                <div class="divider-gold">
+                    <span class="star"><i class="fa-solid fa-graduation-cap"></i></span>
+                </div>
+                <p class="degree-info">Bachelor of Science in Computer Science</p>
+                <p class="university-info">Stanford University • Class of 2026</p>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">00</span>
+                        <span class="countdown-label">Mins</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">00</span>
+                        <span class="countdown-label">Secs</span>
+                    </div>
+                </div>
+
+                <a href="#rsvp" class="btn btn-gold scroll-to-rsvp">Reserve Your Seat</a>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span>Scroll Down</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- Details Section -->
+        <section id="details" class="details-section scroll-fade-in">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">When &amp; Where</span>
+                    <h2 class="section-title">Ceremony &amp; Celebration</h2>
+                    <div class="divider-gold-small"></div>
+                </div>
+
+                <div class="details-grid">
+                    <!-- Card 1: Commencement Ceremony -->
+                    <div class="details-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3>The Ceremony</h3>
+                        <p class="card-date">Saturday, July 25, 2026</p>
+                        <p class="card-time">10:00 AM – 12:30 PM</p>
+                        <p class="card-venue">Stanford Memorial Church</p>
+                        <p class="card-address">450 Jane Stanford Way, Stanford, CA</p>
+                        <a href="https://maps.google.com/?q=Stanford+Memorial+Church" target="_blank" rel="noopener noreferrer" class="card-link">
+                            <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+                        </a>
+                    </div>
+
+                    <!-- Card 2: Main Reception -->
+                    <div class="details-card highlighted-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-champagne-glasses"></i>
+                        </div>
+                        <h3>The Reception</h3>
+                        <p class="card-date">Saturday, July 25, 2026</p>
+                        <p class="card-time">1:30 PM – 4:00 PM</p>
+                        <p class="card-venue">Stanford Faculty Club Garden</p>
+                        <p class="card-address">439 Lagunita Dr, Stanford, CA</p>
+                        <a href="https://maps.google.com/?q=Stanford+Faculty+Club" target="_blank" rel="noopener noreferrer" class="card-link">
+                            <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+                        </a>
+                    </div>
+
+                    <!-- Card 3: Dinner Party -->
+                    <div class="details-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h3>Graduation Dinner</h3>
+                        <p class="card-date">Saturday, July 25, 2026</p>
+                        <p class="card-time">6:30 PM – Late</p>
+                        <p class="card-venue">The Grand Ballroom</p>
+                        <p class="card-address">Sheraton Palo Alto, Palo Alto, CA</p>
+                        <a href="https://maps.google.com/?q=Sheraton+Palo+Alto" target="_blank" rel="noopener noreferrer" class="card-link">
+                            <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Graduate Section -->
+        <section id="about" class="about-section scroll-fade-in">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-image-wrapper">
+                        <div class="gold-frame">
+                            <img src="images/portrait.png" alt="Alex Mercer Graduate Portrait" class="about-img">
+                        </div>
+                    </div>
+                    <div class="about-text-content">
+                        <span class="section-badge">Gratitude &amp; Joy</span>
+                        <h2 class="section-title text-left">A Message of Thanks</h2>
+                        <div class="divider-gold-left"></div>
+                        <p class="about-p">
+                            Four years of hard work, sleepless nights, and endless learning have led to this milestone. I am incredibly grateful for the professors who inspired me, the friends who stood by me, and most of all, my family, whose constant support made this journey possible.
+                        </p>
+                        <p class="about-p">
+                            As I step forward into the field of technology and innovation, I look forward to celebrating this success and the beginning of a new chapter with the people who mean the most to me.
+                        </p>
+                        <div class="graduate-signature">
+                            <span class="signature-text">Alex Mercer</span>
+                            <span class="signature-sub">Class of 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section id="gallery" class="gallery-section scroll-fade-in">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Memories</span>
+                    <h2 class="section-title">The Journey</h2>
+                    <div class="divider-gold-small"></div>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item size-tall">
+                        <div class="gallery-img-container">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" alt="University Campus Library">
+                            <div class="gallery-overlay">
+                                <span>The Campus Life</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item size-wide">
+                        <div class="gallery-img-container">
+                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop" alt="Graduation Cap and Diploma">
+                            <div class="gallery-overlay">
+                                <span>Academic Milestones</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img-container">
+                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop" alt="Late night study group">
+                            <div class="gallery-overlay">
+                                <span>Late Night Coffee &amp; Code</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img-container">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop" alt="Graduation Celebration Ceremony">
+                            <div class="gallery-overlay">
+                                <span>Celebrating Together</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Form Section -->
+        <section id="rsvp" class="rsvp-section scroll-fade-in">
+            <div class="container">
+                <div class="rsvp-wrapper">
+                    <div class="section-header">
+                        <span class="section-badge">Join the celebration</span>
+                        <h2 class="section-title text-white">Kindly Respond</h2>
+                        <p class="section-desc">Please RSVP by July 15, 2026, to help us finalize arrangements.</p>
+                        <div class="divider-gold-small"></div>
+                    </div>
+
+                    <!-- Glassmorphism RSVP Form -->
+                    <form id="rsvp-form" class="rsvp-form-element">
+                        <div class="form-grid">
+                            
+                            <!-- Full Name -->
+                            <div class="form-group full-width">
+                                <label for="guest-name"><i class="fa-solid fa-user"></i> Full Name</label>
+                                <input type="text" id="guest-name" name="name" placeholder="John Doe" required>
+                            </div>
+
+                            <!-- Email / Phone -->
+                            <div class="form-group">
+                                <label for="guest-contact"><i class="fa-solid fa-envelope"></i> Email or Phone</label>
+                                <input type="text" id="guest-contact" name="contact" placeholder="john@example.com" required>
+                            </div>
+
+                            <!-- Attendance Status -->
+                            <div class="form-group">
+                                <label for="attendance-status"><i class="fa-solid fa-calendar-check"></i> Will You Attend?</label>
+                                <div class="select-wrapper">
+                                    <select id="attendance-status" name="status" required>
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="Yes, Ceremony & Reception">Yes, Ceremony &amp; Reception</option>
+                                        <option value="Yes, Ceremony Only">Yes, Ceremony Only</option>
+                                        <option value="Yes, Reception Only">Yes, Reception Only</option>
+                                        <option value="No, Regretfully Decline">No, Regretfully Decline</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Guest Count (Shown dynamically based on attendance) -->
+                            <div class="form-group full-width" id="guest-count-group">
+                                <label for="guest-count"><i class="fa-solid fa-users"></i> Number of Additional Guests</label>
+                                <div class="select-wrapper">
+                                    <select id="guest-count" name="guests">
+                                        <option value="0" selected>0 Additional Guests</option>
+                                        <option value="1">1 Guest</option>
+                                        <option value="2">2 Guests</option>
+                                        <option value="3">3 Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- wishes/message -->
+                            <div class="form-group full-width">
+                                <label for="congrats-message"><i class="fa-solid fa-pen-nib"></i> Wishes / Congratulatory Note</label>
+                                <textarea id="congrats-message" name="message" rows="4" placeholder="Leave a message for the graduate..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="submit" id="submit-btn" class="btn btn-gold btn-large">
+                                <span class="btn-text">Submit RSVP</span>
+                                <span class="btn-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Sending...</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Success / Error Modals -->
+                    <div id="rsvp-status-message" class="rsvp-status-container">
+                        <!-- Dynamic output from JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Congratulations / Wishes Wall -->
+        <section id="wishes" class="wishes-section scroll-fade-in">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Wishes Wall</span>
+                    <h2 class="section-title">Congratulations &amp; Notes</h2>
+                    <div class="divider-gold-small"></div>
+                </div>
+
+                <div class="wishes-grid" id="wishes-board">
+                    <!-- Standard placeholder wishes that will be supplemented by dynamic ones -->
+                    <div class="wish-card">
+                        <p class="wish-text">"So incredibly proud of you, Alex! Wishing you all the best as you embark on this exciting new chapter at Stanford and beyond!"</p>
+                        <div class="wish-author">
+                            <div class="author-info">
+                                <span class="author-name">Aunt Eleanor</span>
+                                <span class="wish-date">June 25, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wish-card">
+                        <p class="wish-text">"Congratulations, mate! Coding next-gen neural systems starts now. Can't wait to celebrate with you at the Faculty Club!"</p>
+                        <div class="wish-author">
+                            <div class="author-info">
+                                <span class="author-name">David K. (Study Partner)</span>
+                                <span class="wish-date">June 26, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wish-card">
+                        <p class="wish-text">"Hard work pays off. The family is ecstatic for your achievement, Alex. Cheers to your graduation!"</p>
+                        <div class="wish-author">
+                            <div class="author-info">
+                                <span class="author-name">The Mercer Family</span>
+                                <span class="wish-date">June 27, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-logo">A &amp; M</div>
+            <p class="footer-quote">"The future belongs to those who believe in the beauty of their dreams."</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="copyright">&copy; 2026 Alex Mercer Graduation Invitation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
