@@ -54,19 +54,13 @@ function doGet(e) {
       status: "success",
       wishes: wishes
     }))
-    .setMimeType(ContentService.MimeType.JSON)
-    .setHeaders({
-      "Access-Control-Allow-Origin": "*"
-    });
+    .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
       message: "Failed to load wishes: " + error.toString()
     }))
-    .setMimeType(ContentService.MimeType.JSON)
-    .setHeaders({
-      "Access-Control-Allow-Origin": "*"
-    });
+    .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
